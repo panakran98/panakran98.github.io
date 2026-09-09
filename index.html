@@ -89,6 +89,12 @@
 
   .about p{margin:0 0 14px; max-width:66ch; color:var(--ink);}
   .about p:last-child{margin-bottom:0;}
+  .about p.interests{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    max-width:66ch;
+  }
+  .about p.interests strong{color:var(--navy); font-weight:600;}
 
   .advisor{color:var(--accent-warm); font-weight:500;}
 
@@ -150,7 +156,7 @@
 
     <ul class="links">
       <li>✉️ <a href="mailto:panagiotiskranias98@gmail.com">Email</a></li>
-      <li>💼 <a href="#" target="_blank" rel="noopener"><!-- TODO: LinkedIn URL -->LinkedIn</a></li>
+      <li>💼 <a href="https://www.linkedin.com/in/panagiotis-kranias-a06626161/" target="_blank" rel="noopener">LinkedIn</a></li>
       <li>🐙 <a href="#" target="_blank" rel="noopener"><!-- TODO: GitHub URL -->GitHub</a></li>
       <li>🎓 <a href="#" target="_blank" rel="noopener"><!-- TODO: Google Scholar URL -->Google Scholar</a></li>
       <li>📄 <a href="#" target="_blank" rel="noopener"><!-- TODO: link to CV PDF --> CV</a></li>
@@ -163,11 +169,19 @@
     <section class="about">
       <div class="section-head"><h2>About</h2></div>
       <p>
-        I am a PhD student in the Department of Electrical and Computer Engineering at the
-        University of Virginia, starting in Fall 2026, where I am fortunate to be advised by
-        Professor <span class="advisor">Nikos Sidiropoulos</span>.
-        <!-- TODO: add a sentence about your research interests within the lab, e.g. tensor
-             decomposition, signal processing, machine learning, optimization. -->
+        I am a first-year Ph.D. student in the Department of Electrical and Computer Engineering
+        at the University of Virginia, where I am fortunate to be advised by
+        Professor <span class="advisor">Nikos Sidiropoulos</span>. My research lies at the
+        intersection of tensor decomposition, statistical signal processing, and machine
+        learning, with an emphasis on developing scalable, theoretically grounded methods for
+        large-scale data analysis.
+      </p>
+      <p class="interests">
+        <strong>Research interests:</strong>
+        Tensor Decomposition &nbsp;•&nbsp;
+        Signal Processing &nbsp;•&nbsp;
+        Machine Learning &nbsp;•&nbsp;
+        Optimization
       </p>
       <p>
         Before UVA, I earned my Diploma in Electrical &amp; Computer Engineering from the
@@ -182,7 +196,8 @@
     <section class="news">
       <div class="section-head"><h2>News</h2></div>
       <ul class="news">
-        <li><span class="date">2026.09</span><span>Starting my PhD at the University of Virginia, advised by Prof. Nikos Sidiropoulos.</span></li>
+        <li><span class="date">2026.08</span><span>Started my PhD at the University of Virginia, advised by Prof. Nikos Sidiropoulos.</span></li>
+        <li><span class="date">2026.03</span><span>Joined Avaca Technologies S.A. as a part-time Software Engineer, building a Planned Maintenance System from scratch.</span></li>
         <li><span class="date">2025.11</span><span>Joined the Hellenic Navy – Center of Automation of Combat Systems as a Software Engineer.</span></li>
         <li><span class="date">2025.02</span><span>Graduated from NTUA with a Diploma in Electrical &amp; Computer Engineering (Grade 10/10 on diploma thesis).</span></li>
         <!-- TODO: add or reorder news items as needed -->
@@ -203,8 +218,22 @@
 
       <div class="exp">
         <div class="exp-head">
+          <span class="exp-role">Software Engineer <span style="font-weight:400; color:var(--ink-soft);">· Part-time</span></span>
+          <span class="exp-date">Mar 2026 – Jul 2026</span>
+        </div>
+        <span class="exp-org">Avaca Technologies S.A., Athens, Greece</span>
+        <ul>
+          <li>Architected and delivered a Planned Maintenance System (PMS) from scratch, managing the full development lifecycle from core logic design to deployment.</li>
+          <li>Designed and implemented scalable backend services, equipment hierarchies, and an automated scheduling engine using Java, Spring Boot, and GraphQL.</li>
+          <li>Spearheaded development within an Agile framework, participating in sprint planning and iterative feature delivery.</li>
+          <li>Managed end-to-end implementation and deployment, translating complex database schemas and JPA entities into a production-ready enterprise solution.</li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="exp-head">
           <span class="exp-role">Software Engineer</span>
-          <span class="exp-date">Nov 2025 – Present</span>
+          <span class="exp-date">Nov 2025 – Jul 2026</span>
         </div>
         <span class="exp-org">Hellenic Navy — Center of Automation of Combat Systems, Athens, Greece</span>
         <ul>
