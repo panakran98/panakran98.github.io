@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panagiotis Kranias</title>
+<meta name="description" content="Personal website of Panagiotis Kranias, PhD student in Electrical and Computer Engineering at the University of Virginia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF8F3;
+    --ink:#1C2431;
+    --ink-soft:#4B5567;
+    --navy:#24314A;
+    --accent:#3C6E71;
+    --accent-warm:#B8763E;
+    --rule:#DFDACC;
+    --max-w:920px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none; border-bottom:1px solid transparent;}
+  a:hover{border-bottom-color:var(--accent);}
+  h1,h2,h3{
+    font-family:'Source Serif 4', Georgia, serif;
+    color:var(--navy);
+    font-weight:600;
+    line-height:1.2;
+    margin:0;
+  }
+
+  .wrap{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:64px 24px 80px;
+    display:grid;
+    grid-template-columns:240px 1fr;
+    gap:56px;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{position:sticky; top:48px; align-self:start;}
+  .avatar{
+    width:150px; height:150px; border-radius:50%;
+    background:var(--navy);
+    color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Source Serif 4', serif;
+    font-size:44px; font-weight:600;
+    margin-bottom:20px;
+    /* TODO: replace this block with <img src="images/profile.jpg" alt="Panagiotis Kranias" class="avatar-img"> */
+  }
+  h1.name{font-size:26px; margin-bottom:4px;}
+  .role{color:var(--ink-soft); font-size:14.5px; margin-top:6px; line-height:1.5;}
+  .location{color:var(--ink-soft); font-size:14px; margin-top:14px; display:flex; align-items:center; gap:6px;}
+
+  .links{list-style:none; padding:0; margin:22px 0 0; display:flex; flex-direction:column; gap:9px;}
+  .links li{font-size:14.5px;}
+  .links a{color:var(--ink); border-bottom:1px solid var(--rule);}
+  .links a:hover{color:var(--accent); border-bottom-color:var(--accent);}
+
+  /* ---------- Main content ---------- */
+  main section{margin-bottom:46px;}
+  main section:last-child{margin-bottom:0;}
+
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:16px;
+  }
+  .section-head h2{font-size:21px;}
+  .section-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--rule);
+  }
+
+  .about p{margin:0 0 14px; max-width:66ch; color:var(--ink);}
+  .about p:last-child{margin-bottom:0;}
+
+  .advisor{color:var(--accent-warm); font-weight:500;}
+
+  ul.news{list-style:none; margin:0; padding:0;}
+  ul.news li{
+    display:grid;
+    grid-template-columns:96px 1fr;
+    gap:16px;
+    padding:9px 0;
+    border-bottom:1px dashed var(--rule);
+    font-size:15px;
+  }
+  ul.news li:last-child{border-bottom:none;}
+  ul.news .date{color:var(--ink-soft); font-size:13.5px; font-variant-numeric:tabular-nums; padding-top:2px;}
+
+  .pub{
+    padding:14px 0;
+    border-bottom:1px dashed var(--rule);
+  }
+  .pub:last-child{border-bottom:none;}
+  .pub .title{font-weight:600; color:var(--ink);}
+  .pub .venue{color:var(--ink-soft); font-size:14px; margin-top:3px;}
+
+  .exp{margin-bottom:22px;}
+  .exp:last-child{margin-bottom:0;}
+  .exp-head{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:4px 12px;}
+  .exp-role{font-weight:600; color:var(--ink);}
+  .exp-org{color:var(--accent); font-size:14.5px;}
+  .exp-date{color:var(--ink-soft); font-size:13.5px; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .exp ul{margin:8px 0 0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .exp ul li{margin-bottom:4px;}
+
+  .skills-grid{display:grid; grid-template-columns:150px 1fr; gap:10px 18px; font-size:14.5px;}
+  .skills-grid dt{color:var(--ink-soft);}
+  .skills-grid dd{margin:0; color:var(--ink);}
+
+  footer{
+    max-width:var(--max-w); margin:0 auto; padding:0 24px 48px;
+    color:var(--ink-soft); font-size:13px;
+  }
+
+  @media (max-width:720px){
+    .wrap{grid-template-columns:1fr; gap:32px; padding:40px 20px 64px;}
+    .sidebar{position:static;}
+    ul.news li{grid-template-columns:80px 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <div class="avatar">PK</div>
+    <h1 class="name">Panagiotis Kranias</h1>
+    <p class="role">PhD Student<br>Electrical &amp; Computer Engineering<br>University of Virginia</p>
+    <p class="location">📍 Charlottesville, VA</p>
+
+    <ul class="links">
+      <li>✉️ <a href="mailto:panagiotiskranias98@gmail.com">Email</a></li>
+      <li>💼 <a href="#" target="_blank" rel="noopener"><!-- TODO: LinkedIn URL -->LinkedIn</a></li>
+      <li>🐙 <a href="#" target="_blank" rel="noopener"><!-- TODO: GitHub URL -->GitHub</a></li>
+      <li>🎓 <a href="#" target="_blank" rel="noopener"><!-- TODO: Google Scholar URL -->Google Scholar</a></li>
+      <li>📄 <a href="#" target="_blank" rel="noopener"><!-- TODO: link to CV PDF --> CV</a></li>
+    </ul>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <section class="about">
+      <div class="section-head"><h2>About</h2></div>
+      <p>
+        I am a PhD student in the Department of Electrical and Computer Engineering at the
+        University of Virginia, starting in Fall 2026, where I am fortunate to be advised by
+        Professor <span class="advisor">Nikos Sidiropoulos</span>.
+        <!-- TODO: add a sentence about your research interests within the lab, e.g. tensor
+             decomposition, signal processing, machine learning, optimization. -->
+      </p>
+      <p>
+        Before UVA, I earned my Diploma in Electrical &amp; Computer Engineering from the
+        National Technical University of Athens (NTUA), Greece, specializing in Information
+        Technology, with a diploma thesis on diffusion models for image analysis in medical
+        imaging and autonomous driving, supervised by Professor Stefanos Kollias. I also worked
+        as a software engineer building backend and machine learning systems for telecom and
+        defense applications.
+      </p>
+    </section>
+
+    <section class="news">
+      <div class="section-head"><h2>News</h2></div>
+      <ul class="news">
+        <li><span class="date">2026.09</span><span>Starting my PhD at the University of Virginia, advised by Prof. Nikos Sidiropoulos.</span></li>
+        <li><span class="date">2025.11</span><span>Joined the Hellenic Navy – Center of Automation of Combat Systems as a Software Engineer.</span></li>
+        <li><span class="date">2025.02</span><span>Graduated from NTUA with a Diploma in Electrical &amp; Computer Engineering (Grade 10/10 on diploma thesis).</span></li>
+        <!-- TODO: add or reorder news items as needed -->
+      </ul>
+    </section>
+
+    <section class="publications">
+      <div class="section-head"><h2>Publications</h2></div>
+      <div class="pub">
+        <div class="title">Autonomous Vehicles: Sophisticated Attacks, Safety Issues, Challenges, Open Topics, Blockchain, and Future Directions</div>
+        <div class="venue">A. Giannaros, A. Karras, L. Theodorakopoulos, C. Karras, P. Kranias — Journal of Cybersecurity and Privacy, vol. 3, no. 3, pp. 493–543, 2023</div>
+      </div>
+      <!-- TODO: add further publications as .pub blocks -->
+    </section>
+
+    <section class="experience">
+      <div class="section-head"><h2>Experience</h2></div>
+
+      <div class="exp">
+        <div class="exp-head">
+          <span class="exp-role">Software Engineer</span>
+          <span class="exp-date">Nov 2025 – Present</span>
+        </div>
+        <span class="exp-org">Hellenic Navy — Center of Automation of Combat Systems, Athens, Greece</span>
+        <ul>
+          <li>Developed secure software for the Navy's command, control, and communications (C3) workflows.</li>
+          <li>Built scalable backend services with Java and Spring Boot for mission-critical environments.</li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="exp-head">
+          <span class="exp-role">Software Engineer</span>
+          <span class="exp-date">Oct 2022 – Nov 2025</span>
+        </div>
+        <span class="exp-org">Intracom Telecom, Athens, Greece</span>
+        <ul>
+          <li>Developed microservice applications with Spring Boot for telecom services.</li>
+          <li>Built front-end applications with React and Angular, deployed across telecom providers in Greece and Southern Europe.</li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="exp-head">
+          <span class="exp-role">Research Assistant</span>
+          <span class="exp-date">Sep 2024 – May 2025</span>
+        </div>
+        <span class="exp-org">Artificial Intelligence &amp; Learning Systems Laboratory (AILS), Athens, Greece</span>
+        <ul>
+          <li>Investigated diffusion models for image super-resolution in medical imaging and autonomous driving.</li>
+        </ul>
+      </div>
+      <!-- TODO: add earlier roles / teaching / tutoring if you'd like them listed -->
+    </section>
+
+    <section class="skills">
+      <div class="section-head"><h2>Skills</h2></div>
+      <dl class="skills-grid">
+        <dt>Languages</dt><dd>Python, C, C++, Java, JavaScript, SQL, MATLAB, Prolog</dd>
+        <dt>ML &amp; AI</dt><dd>PyTorch, TensorFlow, Keras, Scikit-learn, Hugging Face, OpenCV, Diffusion Models</dd>
+        <dt>Frameworks</dt><dd>Spring, React, Angular, Docker, Kubernetes, REST APIs</dd>
+        <dt>Databases</dt><dd>PostgreSQL, MySQL, Oracle, MongoDB</dd>
+        <dt>Cloud</dt><dd>AWS, Google Cloud, MLflow, ONNX</dd>
+      </dl>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  © 2026 Panagiotis Kranias. Built with plain HTML &amp; CSS.
+</footer>
+
+</body>
+</html>
