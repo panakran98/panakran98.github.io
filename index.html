@@ -52,15 +52,15 @@
 
   /* ---------- Sidebar ---------- */
   .sidebar{position:sticky; top:48px; align-self:start;}
-  .avatar{
+  .avatar-img{
     width:150px; height:150px; border-radius:50%;
-    background:var(--navy);
-    color:var(--paper);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Source Serif 4', serif;
-    font-size:44px; font-weight:600;
+    object-fit:cover;
+    object-position:center 30%;
+    display:block;
     margin-bottom:20px;
-    /* TODO: replace this block with <img src="images/profile.jpg" alt="Panagiotis Kranias" class="avatar-img"> */
+    border:3px solid #fff;
+    box-shadow:0 0 0 1px var(--rule);
+    background:var(--navy);
   }
   h1.name{font-size:26px; margin-bottom:4px;}
   .role{color:var(--ink-soft); font-size:14.5px; margin-top:6px; line-height:1.5;}
@@ -131,6 +131,51 @@
   .skills-grid dt{color:var(--ink-soft);}
   .skills-grid dd{margin:0; color:var(--ink);}
 
+  /* ---------- Beyond research + globe ---------- */
+  .personal p{margin:0; max-width:66ch; color:var(--ink);}
+
+  .globe-wrap{
+    display:grid;
+    grid-template-columns:minmax(0,300px) 1fr;
+    gap:32px;
+    align-items:center;
+    margin-top:24px;
+  }
+  #globe{width:100%; height:auto; display:block; cursor:grab; touch-action:none;}
+  #globe:active{cursor:grabbing;}
+  .g-ocean{fill:#EAF0EF;}
+  .g-grat{fill:none; stroke:var(--rule); stroke-width:.5;}
+  .g-country{fill:#D8D2C4; stroke:var(--paper); stroke-width:.5; transition:fill .2s;}
+  .g-country.visited{fill:var(--accent);}
+  .g-country:hover{fill:var(--accent-warm);}
+  .g-outline{fill:none; stroke:var(--ink-soft); stroke-width:.8; opacity:.45;}
+
+  .globe-count{font-family:'Source Serif 4', Georgia, serif; font-size:48px; font-weight:600; color:var(--navy); line-height:1;}
+  .globe-of{color:var(--ink-soft); font-size:15px; margin-top:6px;}
+  .globe-bar{height:6px; max-width:240px; background:var(--rule); border-radius:3px; margin:14px 0 12px; overflow:hidden;}
+  .globe-bar span{display:block; height:100%; width:0; background:var(--accent); transition:width 1s ease;}
+  .globe-hint{font-size:13px; color:var(--ink-soft);}
+  .globe-tip{font-size:14.5px; color:var(--navy); font-weight:500; min-height:1.5em; margin-top:6px;}
+
+  .globe-photos{display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; max-width:260px; margin-top:8px;}
+  .globe-photos button{
+    padding:0; border:0; background:var(--rule); border-radius:6px; overflow:hidden;
+    aspect-ratio:1/1; cursor:zoom-in;
+  }
+  .globe-photos img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .25s;}
+  .globe-photos button:hover img{transform:scale(1.06);}
+  .globe-empty{font-size:13px; color:var(--ink-soft); margin-top:4px;}
+
+  .lightbox{
+    position:fixed; inset:0; z-index:50;
+    background:rgba(28,36,49,.88);
+    display:none; align-items:center; justify-content:center; flex-direction:column;
+    padding:24px; cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:min(92vw, 1100px); max-height:80vh; border-radius:6px; box-shadow:0 10px 40px rgba(0,0,0,.35);}
+  .lightbox figcaption{color:#F4F1EA; font-size:14.5px; margin-top:12px; text-align:center;}
+
   footer{
     max-width:var(--max-w); margin:0 auto; padding:0 24px 48px;
     color:var(--ink-soft); font-size:13px;
@@ -140,6 +185,10 @@
     .wrap{grid-template-columns:1fr; gap:32px; padding:40px 20px 64px;}
     .sidebar{position:static;}
     ul.news li{grid-template-columns:80px 1fr;}
+    .globe-wrap{grid-template-columns:1fr; justify-items:center; text-align:center;}
+    #globe{max-width:300px;}
+    .globe-bar{margin-left:auto; margin-right:auto;}
+    .globe-photos{margin-left:auto; margin-right:auto;}
   }
 </style>
 </head>
@@ -149,7 +198,7 @@
 
   <!-- ================= SIDEBAR ================= -->
   <aside class="sidebar">
-    <div class="avatar">PK</div>
+    <img src="images/profile.jpg" alt="Panagiotis Kranias" class="avatar-img">
     <h1 class="name">Panagiotis Kranias</h1>
     <p class="role">PhD Student<br>Electrical &amp; Computer Engineering<br>University of Virginia</p>
     <p class="location">📍 Charlottesville, VA</p>
@@ -171,22 +220,24 @@
       <p>
         I am a first-year Ph.D. student in the Department of Electrical and Computer Engineering
         at the University of Virginia, where I am fortunate to be advised by
-        Professor <span class="advisor">Nikos Sidiropoulos</span>. My research lies at the
-        intersection of tensor decomposition, statistical signal processing, and machine
-        learning, with an emphasis on developing scalable, theoretically grounded methods for
-        large-scale data analysis.
+        Professor <span class="advisor">Nikos Sidiropoulos</span>. My research focuses on
+        signal processing and machine learning methods that exploit structure in high-dimensional
+        data, with applications to wireless communications. Currently, I study multiview and
+        subspace approaches that recover weak signals from strong interference, with an emphasis
+        on identifiability guarantees and spectrum sharing.
       </p>
       <p class="interests">
         <strong>Research interests:</strong>
-        Tensor Decomposition &nbsp;•&nbsp;
-        Signal Processing &nbsp;•&nbsp;
-        Machine Learning &nbsp;•&nbsp;
-        Optimization
+        Multiview learning (CCA/GCCA) &nbsp;•&nbsp;
+        Subspace methods and identifiability &nbsp;•&nbsp;
+        Tensor decomposition &nbsp;•&nbsp;
+        Signal processing for wireless communications &nbsp;•&nbsp;
+        Spectrum sharing and interference-robust reception
       </p>
       <p>
         Before UVA, I earned my Diploma in Electrical &amp; Computer Engineering from the
-        National Technical University of Athens (NTUA), Greece, specializing in Information
-        Technology, with a diploma thesis on diffusion models for image analysis in medical
+        National Technical University of Athens (NTUA), Greece, specializing in Electronics &amp; Systems,
+        with a diploma thesis on diffusion models for image analysis in medical
         imaging and autonomous driving, supervised by Professor Stefanos Kollias. I also worked
         as a software engineer building backend and machine learning systems for telecom and
         defense applications.
@@ -196,11 +247,12 @@
     <section class="news">
       <div class="section-head"><h2>News</h2></div>
       <ul class="news">
-        <li><span class="date">2026.08</span><span>Started my PhD at the University of Virginia, advised by Prof. Nikos Sidiropoulos.</span></li>
+        <li><span class="date">2026.08</span><span>Started my Ph.D. in Electrical &amp; Computer Engineering at the University of Virginia, advised by Prof. Nikos Sidiropoulos.</span></li>
         <li><span class="date">2026.03</span><span>Joined Avaca Technologies S.A. as a part-time Software Engineer, building a Planned Maintenance System from scratch.</span></li>
         <li><span class="date">2025.11</span><span>Joined the Hellenic Navy – Center of Automation of Combat Systems as a Software Engineer.</span></li>
-        <li><span class="date">2025.02</span><span>Graduated from NTUA with a Diploma in Electrical &amp; Computer Engineering (Grade 10/10 on diploma thesis).</span></li>
-        <!-- TODO: add or reorder news items as needed -->
+        <li><span class="date">2025.02</span><span>Graduated from NTUA with a Diploma in Electrical &amp; Computer Engineering.</span></li>
+        <li><span class="date">2024.09</span><span>Joined the Artificial Intelligence &amp; Learning Systems Laboratory (AILS) at NTUA as a Research Assistant, working on diffusion models for image super-resolution.</span></li>
+        <li><span class="date">2022.10</span><span>Joined Intracom Telecom as a Software Engineer, developing microservices and front-end applications for telecom providers across Greece and Southern Europe.</span></li>
       </ul>
     </section>
 
@@ -278,12 +330,226 @@
       </dl>
     </section>
 
+    <section class="personal">
+      <div class="section-head"><h2>Beyond Research</h2></div>
+      <p>
+        Outside the lab, I love travelling and learning foreign languages. I speak Greek (native),
+        English and French (fluent), Russian and Spanish (intermediate), and I am currently learning
+        Mandarin, which took me to Gannan Normal University in China in 2025 on a cultural exchange
+        scholarship. One of my personal goals is to visit every country in the world: so far I
+        have been to 31 of 195, and the globe below shows where. I have also tutored mathematics,
+        physics, and programming since 2016, and I still enjoy explaining ideas as simply as possible.
+      </p>
+
+      <div class="globe-wrap">
+        <svg id="globe" viewBox="0 0 400 400" role="img" aria-label="Interactive globe highlighting the countries I have visited"></svg>
+        <div class="globe-stats">
+          <div class="globe-count" id="globe-count">31</div>
+          <div class="globe-of">of 195 countries visited · goal: all of them</div>
+          <div class="globe-bar"><span id="globe-bar"></span></div>
+          <div class="globe-hint">Drag to spin · hover or tap a country to see my photos</div>
+          <div class="globe-tip" id="globe-tip">&nbsp;</div>
+          <div class="globe-photos" id="globe-photos"></div>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
+
+<figure class="lightbox" id="lightbox" aria-hidden="true">
+  <img id="lightbox-img" alt="">
+  <figcaption id="lightbox-cap"></figcaption>
+</figure>
 
 <footer>
   © 2026 Panagiotis Kranias. Built with plain HTML &amp; CSS.
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
+(function () {
+  // TODO: list all the countries you have visited.
+  // Use the map's spelling, e.g. "United States of America", "United Kingdom",
+  // "Czechia", "Bosnia and Herz.", "Dominican Rep.", "Dem. Rep. Congo".
+  // Very small countries (Malta, Monaco, Singapore, Vatican, ...) are too small
+  // for this map: they still count, they just are not drawn.
+  const VISITED = [
+    "Greece",
+    "China",
+    "Iceland",
+    "Brazil",
+    "United States of America",
+    "Japan",
+    "Singapore",
+    "Uzbekistan",
+    "UAE",
+    "Turkey",
+    "Armenia",
+    "Georgia",
+    "Italy",
+    "Portugal",
+    "Spain",
+    "Andorra",
+    "France",
+    "Germany",
+    "Belgium",
+    "Switzerland",
+    "Austria",
+    "UK",
+    "Bosnia",
+    "Croatia",
+    "Albania",
+    "Romania",
+    "Slovakia",
+    "Egypt",
+    "Morocco"
+
+  ];
+  const VISITED_COUNT = 31;   // shown on the page
+  const TOTAL = 195;
+
+  // Your photos, per country. Put the files in images/travel/ next to index.html.
+  // The caption is optional. Countries listed here are highlighted automatically.
+  // Tip: resize photos to about 1200px wide (under ~300 KB each) so the page stays fast.
+  const PHOTOS = {
+    "Greece": [
+      { src: "images/travel/greece-1.jpg", caption: "Athens" },
+      { src: "images/travel/greece-2.jpg", caption: "" }
+    ],
+    "China": [
+      { src: "images/travel/china-1.jpg", caption: "Ganzhou, 2025" }
+    ],
+    "China": [
+      { src: "images/travel/egypt1.jpg"}
+    ]
+  };
+  const MAX_THUMBS = 6;
+
+  document.getElementById('globe-count').textContent = VISITED_COUNT;
+  requestAnimationFrame(() => {
+    document.getElementById('globe-bar').style.width = (VISITED_COUNT / TOTAL * 100) + '%';
+  });
+
+  const visited = new Set([...VISITED, ...Object.keys(PHOTOS)]);
+  const tip = document.getElementById('globe-tip');
+  const gallery = document.getElementById('globe-photos');
+  const svg = d3.select('#globe');
+
+  // ---- Full-size photo viewer ----
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-cap');
+  function openLightbox(photo, country) {
+    lbImg.src = photo.src;
+    lbImg.alt = photo.caption || country;
+    lbCap.textContent = photo.caption ? photo.caption + ' · ' + country : country;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+  }
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // ---- Country name + photo thumbnails ----
+  let shownCountry = null;
+  function showCountry(name) {
+    if (name === shownCountry) return;
+    shownCountry = name;
+    tip.textContent = visited.has(name) ? name + ' ✓' : name;
+    gallery.innerHTML = '';
+    const photos = (PHOTOS[name] || []).slice(0, MAX_THUMBS);
+    if (!photos.length) {
+      if (visited.has(name)) gallery.innerHTML = '<div class="globe-empty">Photos coming soon.</div>';
+      return;
+    }
+    photos.forEach(p => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.title = p.caption || name;
+      const img = document.createElement('img');
+      img.src = p.src;
+      img.alt = p.caption || ('Photo from ' + name);
+      img.loading = 'lazy';
+      img.onerror = () => btn.remove();          // hide missing files
+      btn.appendChild(img);
+      btn.addEventListener('click', () => openLightbox(p, name));
+      gallery.appendChild(btn);
+    });
+  }
+
+  const projection = d3.geoOrthographic()
+    .scale(192)
+    .translate([200, 200])
+    .clipAngle(90)
+    .rotate([-22, -30]);            // start centred on Greece
+  const path = d3.geoPath(projection);
+
+  const ocean   = svg.append('path').datum({ type: 'Sphere' }).attr('class', 'g-ocean');
+  const grat    = svg.append('path').datum(d3.geoGraticule10()).attr('class', 'g-grat');
+  const land    = svg.append('g');
+  const outline = svg.append('path').datum({ type: 'Sphere' }).attr('class', 'g-outline');
+
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
+    const countries = topojson.feature(world, world.objects.countries).features;
+
+    // Hovering a country pauses the spin and shows its photos.
+    // The photos stay after the pointer leaves, so they can be clicked.
+    let hovering = false;
+    const shapes = land.selectAll('path')
+      .data(countries)
+      .join('path')
+      .attr('class', d => visited.has(d.properties.name) ? 'g-country visited' : 'g-country')
+      .on('mouseenter', (e, d) => { hovering = true; showCountry(d.properties.name); })
+      .on('click', (e, d) => showCountry(d.properties.name))
+      .on('mouseleave', () => { hovering = false; });
+
+    function render() {
+      ocean.attr('d', path);
+      grat.attr('d', path);
+      shapes.attr('d', path);
+      outline.attr('d', path);
+    }
+    render();
+
+    // Slow auto-rotation (off for users who prefer reduced motion)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let spinning = !reduceMotion;
+    let resumeTimer = null;
+    let last = null;
+    d3.timer(t => {
+      if (spinning && !hovering && last !== null) {
+        const r = projection.rotate();
+        projection.rotate([r[0] + (t - last) * 0.006, r[1]]);
+        render();
+      }
+      last = t;
+    });
+
+    // Drag to rotate
+    svg.call(d3.drag()
+      .on('start', () => { spinning = false; clearTimeout(resumeTimer); })
+      .on('drag', e => {
+        const r = projection.rotate();
+        const k = 75 / projection.scale();
+        projection.rotate([r[0] + e.dx * k, Math.max(-90, Math.min(90, r[1] - e.dy * k))]);
+        render();
+      })
+      .on('end', () => {
+        if (!reduceMotion) resumeTimer = setTimeout(() => { spinning = true; }, 3000);
+      }));
+
+    // Help spot misspelled country names (see the browser console)
+    const names = new Set(countries.map(d => d.properties.name));
+    const notFound = [...visited].filter(n => !names.has(n));
+    if (notFound.length) console.warn('Not found on the globe (misspelled or too small):', notFound);
+  });
+})();
+</script>
 
 </body>
 </html>
